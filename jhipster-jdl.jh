@@ -1,0 +1,26 @@
+entity Diary {
+	type Type
+    title String
+    year String
+    genre String
+    writer String
+    actors String
+    plot String
+    poster String
+    imdbrating Float
+    impression String
+    myrating Float
+}
+enum Type {
+    MOVIE, SERIES
+}
+paginate Diary with pagination
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

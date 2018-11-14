@@ -1,0 +1,82 @@
+<div>
+    <h2 id="page-heading">
+        <span>Diary entries</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-diary" [routerLink]="['/diary/new']" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new entry
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="diaries">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <!-- <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
+            <!-- <th jhiSortBy="poster"><span>Poster</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
+            <th jhiSortBy="title"><span>Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="type"><span>Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="year"><span>Year</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="genre"><span>Genre</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="writer"><span>Writer</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="actors"><span>Actors</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="plot"><span>Plot</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="imdbrating"><span>IMDB rating</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="impression"><span>Impression</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="myrating"><span>My rating</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let diary of diaries ;trackBy: trackId">
+                <!-- <td><a [routerLink]="['/diary', diary.id, 'view' ]">{{diary.id}}</a></td> -->
+                <!-- <td>{{diary.poster}}</td> -->
+                <td>{{diary.title}}<a [routerLink]="['/diary', diary.title, 'view' ]"></a></td>
+                <td>{{diary.type}}</td>
+                <td>{{diary.year}}</td>
+                <td>{{diary.genre}}</td>
+                <td>{{diary.writer}}</td>
+                <td>{{diary.actors}}</td>
+                <td>{{diary.plot}}</td>
+                <td>{{diary.imdbrating}}</td>
+                <td>{{diary.impression}}</td>
+                <td>{{diary.myrating}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/diary', diary.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/diary', diary.id, 'edit']"
+                                class="btn btn-primary btn-sm" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'diary/'+ diary.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="diaries && diaries.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

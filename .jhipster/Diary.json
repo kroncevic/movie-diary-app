@@ -1,0 +1,60 @@
+{
+    "name": "Diary",
+    "fields": [
+        {
+            "fieldName": "type",
+            "fieldType": "Type",
+            "fieldValues": "MOVIE,SERIES"
+        },
+        {
+            "fieldName": "title",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "year",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "genre",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "writer",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "actors",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "plot",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "poster",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "imdbrating",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "impression",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "myrating",
+            "fieldType": "Float"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20181111184808",
+    "entityTableName": "diary",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
